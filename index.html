@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gece cari musik lu</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#080b14;
+ color:white;
+ font-family:Arial;
+}
+header{
+ padding:22px;
+ background:#111827;
+ font-size:25px;
+ font-weight:bold;
+ color:#ffe130;
+}
+.container{
+ padding:20px;
+ max-width:750px;
+ margin:auto;
+}
+h2{margin-top:25px}
+.search{
+ display:flex;
+ gap:8px;
+ margin-top:20px;
+}
+input{
+ flex:1;
+ min-width:0;
+ padding:15px;
+ border-radius:10px;
+ border:1px solid #26354e;
+ background:#151e30;
+ color:hwb(295 0% 2%);
+ outline:none;
+}
+button{
+ border:0;
+ border-radius:10px;
+ padding:14px;
+ background:#dd0000;
+ font-weight:bold;
+ cursor:pointer;
+}
+#results{
+ margin-top:20px;
+}
+.song{
+ background:#151e30;
+ padding:15px;
+ margin-bottom:10px;
+ border-radius:12px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+}
+.song button{white-space:nowrap}
+.player{
+ margin-top:25px;
+ background:#151e30;
+ padding:15px;
+ border-radius:15px;
+}
+iframe{
+ width:100%;
+ aspect-ratio:16/9;
+ border:0;
+ border-radius:10px;
+}
+small{color:#9caec9}
+</style>
+</head>
+
+<body>
+
+<header>🎵 RIZKI GANTENG BGT</header>
+
+<div class="container">
+
+<h2>buruan cari tololl</h2>
+<small>Cari lagu puter ny di yt.</small>
+
+<div class="search">
+<input id="search" placeholder="Gece cari lagu nya jngn lama2...">
+<button onclick="searchSong()">CARI</button>
+</div>
+
+<div id="results"></div>
+
+<div class="player">
+<h3>▶ NOW PLAYING</h3>
+<div id="title">Belom ada lagu yg lu puter</div>
+<br>
+<iframe id="video"
+src="about:blank"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen>
+</iframe>
+</div>
+
+</div>
+
+<script>
+async function searchSong(){
+
+ let query=document.getElementById("search").value.trim();
+ let results=document.getElementById("results");
+
+ if(!query)return;
+
+ results.innerHTML="<p>sabar lagi di cari...</p>";
+
+ let url="https://www.youtube.com/results?search_query="
+ +encodeURIComponent(query);
+
+ // Membuka pencarian YouTube di tab baru
+ window.open(url,"_blank");
+
+ results.innerHTML=`
+ <div class="song">
+ <div>
+ <b>Hasil pencarian YouTube</b><br>
+ <small>${query}</small>
+ </div>
+ <button onclick="openYT('${encodeURIComponent(query)}')">
+ BUKA YT
+ </button>
+ </div>`;
+}
+
+function openyoutube(query){
+ window.open(
+ "https://www.youtube.com/results?search_query="+query,
+ "_blank"
+ );
+}
+
+document.getElementById("search")
+.addEventListener("keypress",function(e){
+ if(e.key==="Enter")searchSong();
+});
+</script>
+
+</body>
+</html>
